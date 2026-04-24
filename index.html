@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matthew Aitchison — Data & Technology in Real Estate</title>
+  <title>Matthew — Data & Technology in Real Estate</title>
   <meta name="description" content="Portfolio of Matthew — Data Lead specialising in data infrastructure, automation, and AI in real estate investment management.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,8 +136,16 @@
       pointer-events: none;
     }
 
+    .hero .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
+
     .hero-content {
-      max-width: 720px;
+      max-width: 580px;
+      flex: 1;
     }
 
     .hero-label {
@@ -221,6 +229,43 @@
     .btn-secondary:hover {
       border-color: var(--text-muted);
       transform: translateY(-1px);
+    }
+
+
+    .hero .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 64px;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 16px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 1s;
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 300px;
+      height: 300px;
+      border-radius: 16px;
+      border: 2px solid var(--accent);
+      opacity: 0.3;
+      z-index: 0;
     }
 
     /* ========================================
@@ -540,6 +585,23 @@
       .contact-links {
         flex-direction: column;
       }
+
+      .hero .container {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image img,
+      .hero-image::after {
+        width: 200px;
+        height: 200px;
+      }
+
+
     }
   </style>
 </head>
@@ -572,6 +634,10 @@
         <div class="hero-cta">
           <a href="#projects" class="btn-primary">See my work &darr;</a>
           <a href="#contact" class="btn-secondary">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-image">
+          <img src="images/headshot.jpg" alt="Matthew - Data Lead" width="300" height="300">
         </div>
       </div>
     </div>
