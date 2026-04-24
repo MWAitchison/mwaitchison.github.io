@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matthew — Data & Technology in Real Estate</title>
+  <meta name="description" content="Portfolio of Matthew — Data Lead specialising in data infrastructure, automation, and AI in real estate investment management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS VARIABLES — Coral + Cool Grey
+       ======================================== */
+    :root {
+      --bg-primary: #FAFBFC;
+      --bg-section: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --text-heading: #0F172A;
+      --text-body: #475569;
+      --text-muted: #94A3B8;
+      --accent: #E8553D;
+      --accent-hover: #D44A34;
+      --accent-light: #FEF2F0;
+      --accent-border: #FECDC6;
+      --border: #E2E8F0;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --max-width: 1080px;
+      --section-padding: 120px;
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-body);
+      background: var(--bg-primary);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      padding: var(--section-padding) 0;
+    }
+
+    /* ========================================
+       NAV
+       ======================================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 251, 252, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover { color: var(--text-heading); }
+
+    .nav-links a.active { color: var(--accent); }
+
+    /* ========================================
+       HERO
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232, 85, 61, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 700;
+      color: var(--text-heading);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    .hero p {
+      font-size: 19px;
+      line-height: 1.7;
+      max-width: 560px;
+      color: var(--text-body);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-heading);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
+    }
+
+    /* ========================================
+       SECTION HEADERS
+       ======================================== */
+    .section-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--text-heading);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
+    /* ========================================
+       ABOUT
+       ======================================== */
+    .about-section {
+      background: var(--bg-section);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ========================================
+       TOOLS / PROJECTS
+       ======================================== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--accent-border);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      background: var(--bg-section);
+      color: var(--text-muted);
+      border-radius: 6px;
+    }
+
+    /* ========================================
+       WRITING / PLACEHOLDER
+       ======================================== */
+    .writing-placeholder {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 48px;
+      text-align: center;
+      max-width: 560px;
+    }
+
+    .writing-placeholder p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* ========================================
+       CONTACT
+       ======================================== */
+    .contact-section {
+      background: var(--bg-section);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-heading);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .contact-link svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       MOBILE MENU
+       ======================================== */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-heading);
+      margin: 5px 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 80px;
+      }
+
+      .container { padding: 0 20px; }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 24px 32px;
+        gap: 20px;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-name">Matthew</a>
+      <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-label">Data lead &middot; Real estate investment</span>
+        <h1>Data and technology in real estate</h1>
+        <p>I build the data infrastructure, reporting systems, and automation tools that help real estate investment teams make better decisions, faster. Currently the sole data professional at a London-based investment manager, working across equity, debt, and residential.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">See my work &darr;</a>
+          <a href="#contact" class="btn-secondary">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">About</span>
+        <div class="about-grid">
+          <div class="about-text">
+            <div class="section-title">The person behind the pipeline</div>
+            <p>I joined Fiera Real Estate UK in 2022 as a graduate hire and quickly became the firm's central data person. What started as Excel and basic reporting has grown into a full data function spanning Airtable, Power BI, SQL Server, and Python, all built and maintained independently.</p>
+            <p>I work across the entire business: investment teams rely on my dashboards and deal pipelines, investor relations use the platforms I've built for meeting tracking and reporting, and finance teams use automated data flows I've connected to their accounting systems.</p>
+            <p>More recently I've taken on the firm's AI agenda, running internal workshops, building AI-powered data extraction tools, and acting as the bridge between emerging technology and practical business use. I care about making data useful, not just available.</p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="stat-number">3</div>
+              <div class="stat-label">Business lines supported</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">1</div>
+              <div class="stat-label">Person data team</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">4+</div>
+              <div class="stat-label">Years in proptech & RE data</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Live dashboards &amp; tools</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Tools I've built</span>
+        <div class="section-title">Systems that run the business</div>
+        <p class="section-desc">These aren't side projects. They're production tools used daily by investment professionals, portfolio managers, and senior leadership.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><path d="M3 10h14M10 3v14"/></svg>
+          </div>
+          <h3>DigiDebt</h3>
+          <p>An automated deal pipeline for the debt investment team. Broker opportunities hit an email trigger, get ingested into Airtable via automation, and AI fields extract 20+ structured data points from unstructured deal summaries. Two Power BI dashboards sit on top for portfolio monitoring and mandate tracking.</p>
+          <div class="card-tags">
+            <span class="tag">Airtable</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">AI fields</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>
+          </div>
+          <h3>Investor Intelligence Hub</h3>
+          <p>A three-phase Airtable platform replacing fragmented Salesforce and Excel workflows for the IR team. Centralises investor meeting tracking, contact management, and reporting into a single source of truth. Approved at board level.</p>
+          <div class="card-tags">
+            <span class="tag">Airtable</span>
+            <span class="tag">Salesforce API</span>
+            <span class="tag">IR workflow</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M3 8h14"/></svg>
+          </div>
+          <h3>PBSA Investment Heatmap</h3>
+          <p>A Python tool for the investment team that overlays HESA university enrolment data with TravelTime API isochrones to visualise student housing catchment areas. Used to identify undersupplied markets and inform acquisition strategy.</p>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+            <span class="tag">HESA data</span>
+            <span class="tag">TravelTime API</span>
+            <span class="tag">Geospatial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS / CASE STUDIES -->
+  <section id="projects" class="about-section">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Projects</span>
+        <div class="section-title">Selected work</div>
+        <p class="section-desc">Deeper dives into problems I've solved and systems I've shipped.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><path d="M4 16V8l6-5 6 5v8a1 1 0 01-1 1H5a1 1 0 01-1-1z"/></svg>
+          </div>
+          <h3>Xero Accounting Pipeline</h3>
+          <p>Built a Python-to-SQL Server pipeline pulling live data from Xero's Accounting API into a three-table schema (accounts, trial balance, journals), feeding Power BI dashboards for the finance team. Replaced manual spreadsheet reconciliation.</p>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL Server</span>
+            <span class="tag">Xero API</span>
+            <span class="tag">Power BI</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M8 10h4M8 14h2"/></svg>
+          </div>
+          <h3>Valuation Report Data Extraction</h3>
+          <p>An Airtable workflow using AI fields to parse commercial property valuation PDFs, extracting NIY, equivalent yield, market value, and valuation dates. Handles large multi-property reports with structured output ready for reporting.</p>
+          <div class="card-tags">
+            <span class="tag">Airtable</span>
+            <span class="tag">AI extraction</span>
+            <span class="tag">PDF parsing</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg width="20" height="20" fill="none" stroke="#E8553D" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Asset Image Pipeline</h3>
+          <p>A GitHub Actions pipeline that syncs property images from Airtable to GitHub, replacing expiring attachment URLs with permanent links across three Airtable bases. Ensures dashboards and reports always display current imagery.</p>
+          <div class="card-tags">
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Python</span>
+            <span class="tag">Airtable API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Writing</span>
+        <div class="section-title">Thinking out loud</div>
+        <p class="section-desc">Thoughts on data, proptech, and working at the intersection of real estate and technology. Coming soon.</p>
+        <div class="writing-placeholder">
+          <p>Articles and thought pieces will appear here. Watch this space.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Contact</span>
+        <div class="section-title">Let's connect</div>
+        <p>Whether it's about data in real estate, proptech, or just a good conversation about what's possible, I'd like to hear from you.</p>
+        <div class="contact-links">
+          <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Matthew. Built with care, deployed on GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (window.scrollY >= top) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
